@@ -27,6 +27,24 @@ galeriaModel.getById = (id)=>{
     }
 }
 
+galeriaModel.addNew = ( {i_title,i_url,i_thumbnailUrl,i_album} )=>{
+    var newGaleria = Object.assign(
+        {}, 
+        userTemplate,
+        {
+            title:i_title,
+            url:i_url,
+            thumbnailUrl:i_thumbnailUrl,
+            album:i_album,            
+            userDateCreated:new Date().getTime()
+        }
+    );
+    newGaleria.ID = galeriaCollection.length + 1;
+
+    galeriaCollection.push(newGaleria);
+    return newGaleria;
+};
+
 galeriaCollection.push(
     Object.assign(
         {}, 
