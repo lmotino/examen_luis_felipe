@@ -30,7 +30,7 @@ galeriaModel.getById = (id)=>{
 galeriaModel.addNew = ( {i_title,i_url,i_thumbnailUrl,i_album} )=>{
     var newGaleria = Object.assign(
         {}, 
-        userTemplate,
+        galeriaTemplate,
         {
             title:i_title,
             url:i_url,
@@ -43,6 +43,35 @@ galeriaModel.addNew = ( {i_title,i_url,i_thumbnailUrl,i_album} )=>{
 
     galeriaCollection.push(newGaleria);
     return newGaleria;
+};
+
+galeriaModel.update =(id,{ i_title, i_album})=>{
+    var updatingGaleria = galeriaCollection.filter(
+        (o, i)=>{
+            return o.ID === id;
+        }
+    );
+    if(updatingGaleria && updatingGaleria.length>0){
+        updatingGaleria = updatingGaleria[0];
+    } else {
+        return null;
+    }
+    var updateGaleria = {};
+    var newUpdatedCollection = galeriaCollection.map(
+        (o, i)=>{
+            if(o.userID === id){
+                updateGaleria = Object.assign({},
+                    o,
+                    { title:i_title, album:i_album}
+                );
+                return updateGaleria;                
+            }else{
+                return o;
+            }
+        }
+    )
+    galeriaCollection = newUpdatedCollection;
+    return updateGaleria;
 };
 
 galeriaCollection.push(

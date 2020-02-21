@@ -21,4 +21,11 @@ router.post('/galeria/new', (req, res)=>{
     var newGaleria = galeriaModel.addNew(datosEnviados);
     return res.status(200).json(newGaleria);
 });
+
+// http://localhost:3000/api/galeria/galeria/upd/:id
+router.put('/galeria/upd/:id',(req, res)=>{
+    var id = parseInt(req.params.id);
+    var updGaleria = galeriaModel.update(id, req.body);
+    res.status(200).json(updGaleria);
+});
 module.exports = router;
